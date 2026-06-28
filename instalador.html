@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masita — Descarga la app</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #1a1008;
+    color: #E0D5C5;
+    font-family: 'Georgia', serif;
+    min-height: 100vh;
+  }
+
+  /* Nav */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    border-bottom: 1px solid #3a2510;
+  }
+  .logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #F4C553;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .nav-version {
+    font-size: 13px;
+    color: #888;
+    font-family: monospace;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 80px 20px 60px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .hero-icon {
+    width: 90px;
+    height: 90px;
+    background: #2C1A10;
+    border: 2px solid #D7932B;
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 30px;
+    font-size: 40px;
+  }
+  .hero h1 {
+    font-size: 48px;
+    color: #F4C553;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+  }
+  .hero p {
+    font-size: 18px;
+    color: #9A8870;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  /* Botón principal */
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #D7932B;
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 18px 40px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    font-family: 'Georgia', serif;
+  }
+  .btn-download:hover { background: #E8A33B; }
+  .btn-download:active { transform: scale(0.98); }
+  .btn-download svg { width: 24px; height: 24px; }
+
+  .download-meta {
+    margin-top: 14px;
+    font-size: 13px;
+    color: #666;
+    font-family: monospace;
+  }
+
+  /* Pasos de instalación */
+  .steps-section {
+    max-width: 680px;
+    margin: 60px auto;
+    padding: 0 20px;
+  }
+  .steps-title {
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: #888;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    position: relative;
+  }
+  .step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 44px;
+    width: 2px;
+    height: calc(100% - 8px);
+    background: #2C1A10;
+  }
+  .step-num {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    background: #2C1A10;
+    border: 2px solid #D7932B;
+    color: #F4C553;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+  .step-body {
+    padding: 8px 0 36px;
+  }
+  .step-body h3 {
+    font-size: 17px;
+    color: #E0D5C5;
+    margin-bottom: 6px;
+  }
+  .step-body p {
+    font-size: 14px;
+    color: #7a6a55;
+    line-height: 1.6;
+  }
+  .step-body code {
+    background: #2C1A10;
+    color: #F4C553;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 13px;
+  }
+
+  /* Features */
+  .features {
+    max-width: 680px;
+    margin: 0 auto 80px;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+  }
+  .feature-card {
+    background: #2C1A10;
+    border: 1px solid #3a2510;
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .feature-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  .feature-card h4 {
+    font-size: 14px;
+    color: #F4C553;
+    margin-bottom: 6px;
+  }
+  .feature-card p {
+    font-size: 13px;
+    color: #7a6a55;
+    line-height: 1.5;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 30px;
+    border-top: 1px solid #2C1A10;
+    font-size: 13px;
+    color: #555;
+    font-family: monospace;
+  }
+
+  /* Android badge */
+  .android-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #1a2a1a;
+    border: 1px solid #2a4a2a;
+    color: #6abf6a;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    font-family: monospace;
+  }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 34px; }
+    nav { padding: 16px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">🥟 Masita</span>
+  <span class="nav-version">v1.0.0</span>
+</nav>
+
+<section class="hero">
+  <div class="hero-icon">🥟</div>
+  <div class="android-badge">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="#6abf6a"><path d="M17.523 15.341l1.043-1.806a.5.5 0 00-.866-.5l-1.056 1.83A6.97 6.97 0 0112 14a6.97 6.97 0 01-4.644 1.865L6.3 13.035a.5.5 0 00-.866.5l1.043 1.806A7 7 0 005 21h14a7 7 0 00-1.477-5.659zM8.5 19a1 1 0 110-2 1 1 0 010 2zm7 0a1 1 0 110-2 1 1 0 010 2zM6.5 8l-1.5-2.6L6.44 4h11.12L19 5.4 17.5 8h-11zM12 3a.5.5 0 01.5.5v1a.5.5 0 01-1 0v-1A.5.5 0 0112 3z"/></svg>
+    Solo Android
+  </div>
+  <h1>Gestiona tus pedidos</h1>
+  <p>Controla pedidos, gastos y ganancias de tu negocio de empanadas desde el celular.</p>
+
+  <a href="#" class="btn-download" id="btnDownload" onclick="descargar(event)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M12 3v13M7 11l5 5 5-5M3 19h18"/>
+    </svg>
+    Descargar APK
+  </a>
+  <div class="download-meta">masita-v1.0.0.apk · Android 8.0+</div>
+</section>
+
+<section class="steps-section">
+  <p class="steps-title">Cómo instalar</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>Descarga el APK</h3>
+        <p>Toca el botón de arriba. El archivo se guardará en tu carpeta de <code>Descargas</code>.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>Permite fuentes desconocidas</h3>
+        <p>Ve a <code>Ajustes → Seguridad</code> y activa <code>Instalar apps desconocidas</code> para tu navegador.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>Instala la app</h3>
+        <p>Abre el archivo descargado y toca <code>Instalar</code>. En 10 segundos está lista.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>Inicia sesión</h3>
+        <p>Usa tu cuenta de Masita. Tus pedidos y gastos se sincronizan en tiempo real.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="feature-card">
+    <div class="feature-icon">📋</div>
+    <h4>Gestión de pedidos</h4>
+    <p>Crea, edita y marca pedidos como entregados con un toque.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">💰</div>
+    <h4>Registro de gastos</h4>
+    <p>Registra ingredientes y costos para conocer tu inversión real.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">📊</div>
+    <h4>Resumen de ganancias</h4>
+    <p>Ventas menos inversión. Efectivo y transferencia por separado.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">🔔</div>
+    <h4>Alertas de entrega</h4>
+    <p>Notificaciones 30 y 15 minutos antes de cada retiro.</p>
+  </div>
+</section>
+
+<footer>
+  Masita © 2026 · Solo para uso interno
+</footer>
+
+<script>
+  function descargar(e) {
+    e.preventDefault();
+    const btn = document.getElementById('btnDownload');
+    const original = btn.innerHTML;
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="24" height="24"><path d="M12 3v13M7 11l5 5 5-5M3 19h18"/></svg> Descargando...`;
+    btn.style.background = '#a06a1a';
+
+    window.location.href = 'https://expo.dev/artifacts/eas/1pc4wObhGgxaOIWistgWhf1toAyTbxH2Wjc5nxCNS4I.apk';
+
+    setTimeout(() => {
+      btn.innerHTML = original;
+      btn.style.background = '';
+    }, 2000);
+  }
+</script>
+
+</body>
+</html>
